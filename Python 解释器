@@ -1,0 +1,6 @@
+Python解释器包含以下几种
+1、CPython  官方python自带的解释器，用C语言开发
+2、IPython  是基于CPython之上的一个交互式解释器，CPython用>>>作为提示符，而IPython用In [序号]:作为提示符
+3、PyPy     它的目标是执行速度。PyPy采用JIT技术，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。
+4、Jython   Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行
+5、IronPython   IronPython和Jython类似，只不过IronPython是运行在微软.Net平台上的Python解释器，可以直接把Python代码编译成.Net的字节码
