@@ -1,0 +1,4 @@
+这一节学习了python的输入和输出
+input（）函数负责输入，可以input（‘plz input something：’）提示用户输入内容
+print（）函数负责输出，既可以输出字符串 如print（‘hello world’），也可以输出整形或浮点型，如 print（3+2.4）
+print 函数可以输出多个字符串，字符串之间逗号隔开，如print（'abc','def'）
