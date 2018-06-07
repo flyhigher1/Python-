@@ -1,0 +1,77 @@
+字符编码通常有以下几种：
+1、ascii 编码， 一个字节8个byte，美国人发明，最多支持255个字符
+2、unicode编码，两个字节，可以支持中文
+3、utf-8编码，可变长1-6个字节，主要是为了在保存和传输时节省存储空间，通常英文占1个字节，中文占3个字节
+********************************************************
+对于单个字符的编码，Python提供了ord()函数获取字符的整数表示，chr()函数把编码转换为对应的字符：
+>>> ord('A')
+65
+>>> ord('中')
+20013
+>>> chr(66)
+'B'
+>>> chr(25991)
+'文'
+*********************************************************
+如果知道字符的整数编码，还可以用十六进制这么写str：
+
+>>> '\u4e2d\u6587'
+'中文'
+*********************************************************
+由于Python的字符串类型是str，在内存中以Unicode表示，一个字符对应若干个字节。如果要在网络上传输，或者保存到磁盘上，就需要把str变为以字节为单位的bytes。
+
+Python对bytes类型的数据用带b前缀的单引号或双引号表示：
+
+x = b'ABC'
+
+‘ABC’ 和 b'ABC' 是不同的，前者代表字符串str，后者每个字符占1个字节
+*********************************************************
+以Unicode表示的str通过encode()方法可以编码为指定的bytes，例如：
+
+>>> 'ABC'.encode('ascii')
+b'ABC'
+>>> '中文'.encode('utf-8')
+b'\xe4\xb8\xad\xe6\x96\x87'
+>>> '中文'.encode('ascii')  -------‘中文’本来是unicode，每个字符占两个字节，用ascii当然就无法编码了
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+
+在bytes中，无法显示为ASCII字符的字节，用\x##显示
+*********************************************************
+反过来，如果我们从网络或磁盘上读取了字节流，那么读到的数据就是bytes。要把bytes变为str，就需要用decode()方法：
+
+>>> b'ABC'.decode('ascii')
+'ABC'
+>>> b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')   --------------三个字节对应一个utf-8中文字符
+'中文'
+如果bytes中包含无法解码的字节，decode()方法会报错：
+
+>>> b'\xe4\xb8\xad\xff'.decode('utf-8')   -------------这里多了一个字节xff，无法编码为utf-8字符
+Traceback (most recent call last):
+  ...
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 3: invalid start byte
+如果bytes中只有一小部分无效的字节，可以传入errors='ignore'忽略错误的字节：
+
+>>> b'\xe4\xb8\xad\xff'.decode('utf-8', errors='ignore')
+'中'
+***********************************************************
+要计算str包含多少个字符，可以用len()函数：
+
+>>> len('ABC')
+3
+>>> len('中文')
+2
+len()函数计算的是str的字符数，如果换成bytes，len()函数就计算字节数：
+
+>>> len(b'ABC')
+3
+>>> len(b'\xe4\xb8\xad\xe6\x96\x87')
+6
+>>> len('中文'.encode('utf-8'))
+6
+************************************************************
+格式化打印
+print(f'{(s2 - s1) / s1:.1%}')的解释：
+print(f'')是py3.6的新特性相当于print(''.format),
+而format中有这样一种用法，{:.2%}把数字有百分数形式显示
