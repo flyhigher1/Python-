@@ -1,0 +1,35 @@
+list是一个数组，有insert、pop、append等函数，分别是插入、删除、追加
+
+list.append()在最后追加
+list.insert(index,'xxx') 在指定索引插入数据
+list.pop（）删除最后一个索引的数据
+list.pop（index）删除指定索引的数据
+替换可以直接对数组的指定索引赋值
+
+list里面的元素的数据类型也可以不同，比如：
+
+>>> L = ['Apple', 123, True]
+list元素也可以是另一个list，比如：
+
+>>> s = ['python', 'java', ['asp', 'php'], 'scheme']
+>>> len(s)
+4
+
+>>> p = ['asp', 'php']
+>>> s = ['python', 'java', p, 'scheme']
+
+要拿到'php'可以写p[1]或者s[2][1]，因此s可以看成是一个二维数组，类似的还有三维、四维……数组，不过很少用到。
+
+tuple
+另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改，比如同样是列出同学的名字：
+
+>>> classmates = ('Michael', 'Bob', 'Tracy')
+
+所谓不能修改，指的是对应索引指向的对象不能修改，如果该对象是一个列表，那列表里的值还是可以修改的
+
+如果元组里只有一个元素，那么赋值时要加逗号，如下所示:
+>>> t = (1,)
+>>> t
+(1,)
+
+如果不带逗号，那么就会被当成1这个数
