@@ -1,0 +1,11 @@
+if age>18:
+    print('xxxx')
+elif:
+    print('xxxx')
+else:
+
+if x:  ----只要x不为0，不为空，不为空的list，判断结果就为true
+
+当if判断的第一个条件为true时，就不会执行后面的判断步骤了
+
+对于使用input输入的变量值进行判断时，要注意类型转换
